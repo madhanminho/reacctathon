@@ -1,5 +1,5 @@
 {
-  "name": "expense-manager-test",
+  "name": "jobportal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,8 +12,10 @@
     "nodemon": "^1.17.5",
     "react": "^16.1.1",
     "react-bootstrap": "^0.31.5",
+    "react-desktop": "^0.3.5",
     "react-dom": "^16.1.1",
     "react-modal": "^3.4.5",
+    "react-responsive": "^4.1.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.0.17"
   },

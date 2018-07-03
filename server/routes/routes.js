@@ -2,23 +2,62 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var Candidate = require('../../models/Candidate');
 var Expense = require('../../models/Expense');
+var Job = require('../../models/Job');
 router.get('/', function(req, res){
   res.render('index')
 });
 
-router.route('/viewAppliedJobs')
+router.route('/viewAppliedJobIds')
 .get(function(req, res) {
-  console.log( req.query.jobid);
+  console.log( req.query.Candidate_id);
  const doc = {
-     jobid: req.query.jobid
+     Candidate_id:parseInt(req.query.Candidate_id)
  };
  console.log(doc);
- Expense.find(doc,{"_id":0}, function(err, expenses) {
+
+ Candidate.find(
+   doc,{"_id":0,"Job_Id_Applied":1}
+ , function(err, json) {
   if (err)
    res.send(err);
-   console.log(expenses);
-  res.json(expenses);
+   console.log(json);
+  res.json(json);
+ });
+});
+router.route('/viewAppliedJobDetails')
+.get(function(req, res) {
+    console.log( "into JobDetails");
+  console.log( req.query.Job_Id_Applied);
+
+var input=req.query.Job_Id_Applied.split(",").map(Number).filter(Boolean);
+
+
+ Job.find({"Job_id":{$in:input}}, function(err, json) {
+  if (err)
+   res.send(err);
+   console.log(json);
+  res.json(json);
+ });
+});
+
+router.route('/jobs')
+.get(function(req, res) {
+ Job.find({},{"_id":0}, function(err, json) {
+  if (err)
+   res.send(err);
+   console.log(json);
+  res.json(json);
+ });
+});
+router.route('/exp')
+.get(function(req, res) {
+ Job.find({},{"_id":0}, function(err, json) {
+  if (err)
+   res.send(err);
+   console.log(json);
+  res.json(json);
  });
 });
 
